@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.solodroid.ecommerce"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="23" />
+
+    <permission 
+    		android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE"
+            android:protectionLevel="signature" />
+
+    <uses-permission android:name="YOUR_PACKAGE_NAME.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- START: ShortcutBadger -->
+    <!-- for Samsung -->
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+
+    <!-- for htc -->
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+
+    <!-- for sony -->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+
+    <!-- for apex -->
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" />
+
+    <!-- for solid -->
+    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" />
+    <!-- End: ShortcutBadger -->
+    
+    <application
+        android:name="com.solodroid.ecommerce.analytics.Analytics"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivitySplash"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.solodroid.ecommerce.activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityMenuCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityMenuList"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityMenuDetail"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label=""
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityCart"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityCheckout"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityConfirmMessage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityInformation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.solodroid.ecommerce.activities.ActivityAbout"
+            android:screenOrientation="portrait" />
+        
+        <!-- OneSignal -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="onesignal_app_id"
+            android:value="YOUR_ONESIGNAL_APP_ID" />
+        <meta-data
+            android:name="onesignal_google_project_number"
+            android:value="str:YOUR_ONESIGNAL_GOOGLE_PROJECT_NUMBER" />
+
+        <receiver
+            android:name="com.onesignal.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="YOUR_PACKAGE_NAME" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.onesignal.NotificationOpenedReceiver" />
+
+        <service android:name="com.onesignal.GcmIntentService" />
+        <service
+            android:name="com.onesignal.SyncService"
+            android:stopWithTask="false" />
+
+        <activity
+            android:name="com.onesignal.PermissionsActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            
+            <service android:name="com.onesignal.NotificationRestoreService" />
+		<receiver android:name="com.onesignal.BootUpReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name="com.onesignal.UpgradeReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+			</intent-filter>
+		</receiver>
+
+    </application>
+
+</manifest>
